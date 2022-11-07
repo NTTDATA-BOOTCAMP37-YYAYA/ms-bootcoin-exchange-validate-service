@@ -1,0 +1,44 @@
+server:
+  port: 4004
+spring:
+  application:
+    name: ms-bootcoin-exchange-validate-service
+  #config:
+  # import: optional:configserver:http://localhost:8888
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: myGroup
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+
+    
+client:
+  bank:
+    transaction-validate:
+      url: http://localhost:8105/bankTransactionValidate
+  yanki:
+    transaction-validate:
+      url: http://localhost:5002/yankiTransactionValidate  
+  bootcoin:
+    wallet:
+      url: http://localhost:5002/yankiTransactionValidate
+      
+kafka:
+  topic:
+    bank:
+      transaction:
+        bootcoin-create:
+          name: bank-bootcoin-transaction-create
+    bootcoin:
+      transaction:
+        update:
+          name: bootcoin-transaction-update
+        create:
+          name: bootcoin-transaction-create
+
